@@ -43,7 +43,6 @@ public static void main(String[] args) throws Exception {
             while (leitor.hasNextLine()){
                 
                 armazenamentoPalavra = leitor.next();
-                vetorDicionario[0] = "Alou";
                 String armazenamentoTemporario;
                 
                 
@@ -51,9 +50,7 @@ public static void main(String[] args) throws Exception {
             
                     if (vetorDicionario[i] == null){
                         vetorDicionario[i] = armazenamentoPalavra;
-                    }
-                    
-                    if (vetorDicionario[i].compareTo(armazenamentoPalavra) != 0){
+                    }else if (vetorDicionario[i].compareTo(armazenamentoPalavra) != 0){
                         
                         if(vetorDicionario[i].compareTo(armazenamentoPalavra) > 0){
                             armazenamentoTemporario = vetorDicionario[i];
@@ -66,13 +63,15 @@ public static void main(String[] args) throws Exception {
                         
                     }
                
-                    for (i = 0; i < 5; i++){
-                        System.out.println(vetorDicionario[i]); 
-                    }
+                    
                 
                 }
                    
             }
+            
+            for (int i = 0; i < 5; i++){
+                        System.out.println(vetorDicionario[i]); 
+                    }
         
       
         
