@@ -26,9 +26,9 @@ public class Trabalho1 {
 
   public static String[] processarArquivo(String[] dicionario, String arquivo) throws Exception {
     Scanner leitor = new Scanner(new File(arquivo));
-    String linha;
+    String[] linha;
     while (leitor.hasNextLine()) {
-      linha = leitor.next().toLowerCase();
+      linha = leitor.next().toLowerCase().split("[\\W]");
       dicionario = popular(dicionario, linha);
     }
     return dicionario;
@@ -53,10 +53,10 @@ public class Trabalho1 {
     return true;
   }
 
-  public static String[] popular(String[] dicionario, String linha) {
-    
-    if (buscaBinaria(dicionario, linha) == true) {
-      dicionario[0] = linha;
+  public static String[] popular(String[] dicionario, String[] linha) {
+    int indice = 0;
+    if (buscaBinaria(dicionario, linha[indice]) == true) {
+      dicionario[indice] = linha[indice];
       for (int i = 1; i < dicionario.length; i++) {
           String aux = dicionario[i];
           int j = i - 1;
