@@ -11,26 +11,25 @@ public class Trabalho1 {
     System.out.print("Nome do arquivo: ");
     String arquivo = teclado.next();
     String[] dicionario = new String[1000];
-    for (int i = 0; i < dicionario.length - 1; i ++){
+    for (int i = 0; i < dicionario.length; i ++){
         dicionario[i] = "";
     }
 
 
     dicionario = processarArquivo(dicionario, arquivo);
 
-    for (int i = 0; i < dicionario.length - 1; i ++){
+    for (int i = 0; i < dicionario.length; i ++){
         System.out.println(dicionario[i]);
     }
 
-    //buscaBinaria(arquivo, armazenaPrimeiraPalavra);
   }
 
   public static String[] processarArquivo(String[] dicionario, String arquivo) throws Exception {
     Scanner leitor = new Scanner(new File(arquivo));
     String linha;
     while (leitor.hasNextLine()) {
-      linha = leitor.nextLine();
-      dicionario = popular(dicionario, arquivo);
+      linha = leitor.next().toLowerCase();
+      dicionario = popular(dicionario, linha);
     }
     return dicionario;
   }
@@ -43,33 +42,33 @@ public class Trabalho1 {
     while (i <= f) {
       m = (i + f) / 2;
 
-      // if (i > f) {
-      //   return false;
-      // }
-
       if (dicionario[m].compareTo(word) == 0){ 
-      return true; 
-      }else if (word.compareTo(dicionario[m]) < 0){ // esquerda
+      return false; 
+      }else if (dicionario[m].compareTo(word) < 0){ // esquerda
         i = m + 1; 
-      }else if (word.compareTo(dicionario[m]) > 0){
+      }else if (dicionario[m].compareTo(word) > 0){
         f = m - 1; // x > v[m] - direita
       }
     }
-    return false;
+    return true;
   }
 
-  public static String[] popular(String[] dicionario, String arquivo) {
-
-    for (int i = 1; i < dicionario.length; i++) {
-      if (buscaBinaria(dicionario, dicionario[i]) == false) {
-        int j = i;
-        String x = dicionario[j];
-        while ((j > 0) && x.compareTo(dicionario[j - 1]) < 0) {
-          dicionario[j] = dicionario[j - 1];
-          j--;
+  public static String[] popular(String[] dicionario, String linha) {
+    
+    if (buscaBinaria(dicionario, linha) == true) {
+      dicionario[0] = linha;
+      for (int i = 1; i < dicionario.length; i++) {
+          String aux = dicionario[i];
+          int j = i - 1;
+          while ((j >= 0) && dicionario[j].compareTo(aux) > 0) {
+            dicionario[j+1] = dicionario[j];
+            //  if (dicionario[j] == ""){
+            //    dicionario[j] = linha;
+            //  }
+            j--;
+          }
+          dicionario[j + 1] = aux;
         }
-        dicionario[j] = x;
-      }
     }
 
     return dicionario;
