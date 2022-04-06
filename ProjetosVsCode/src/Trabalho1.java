@@ -36,7 +36,9 @@ public class Trabalho1 {
         System.out.println(dicionarioOrdenado[i]);
       }
     }
+
     System.out.println("total de palavras diferentes no dicionario = " + contarPalavras(dicionarioOrdenado));
+    
   }
 
   //Pega as palavras do arquivo informado
@@ -46,7 +48,7 @@ public class Trabalho1 {
     String[] linha;
     while (entrada.hasNextLine()) {
       linha = entrada.next().toLowerCase().split("[\\W]");
-      dicionarioOrdenado = popularDicionario(dicionarioOrdenado, linha);
+      popularDicionario(dicionarioOrdenado, linha);
     }
     return dicionarioOrdenado;
   }
