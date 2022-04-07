@@ -31,13 +31,7 @@ public class Trabalho1 {
 
     dicionarioOrdenado = processarArquivo(dicionarioOrdenado, arquivo);
 
-    for (int i = 0; i < dicionarioOrdenado.length; i ++){
-      if (dicionarioOrdenado[i] != ""){
-        System.out.println(dicionarioOrdenado[i]);
-      }
-    }
-
-    System.out.println("total de palavras diferentes no dicionario = " + contarPalavras(dicionarioOrdenado));
+    System.out.println("total de palavras diferentes no dicionario = " + contarPalavrasEImprimir(dicionarioOrdenado));
     
   }
 
@@ -92,12 +86,13 @@ public class Trabalho1 {
     return dicionarioOrdenado;
   }
 
-  //Conta quantas palavras possui no vetor
-  public static int contarPalavras(String[] dicionarioOrdenado){
+  //Conta quantas palavras possui no vetor e imprime na tela
+  public static int contarPalavrasEImprimir(String[] dicionarioOrdenado){
     int count = 1;
 
     for (int i = 0; i < dicionarioOrdenado.length -1; i++){
       if (dicionarioOrdenado[i] != ""){
+        System.out.println(dicionarioOrdenado[i]);
         count += 1;
       }
     }
