@@ -21,8 +21,7 @@ public class Trabalho1 {
     throws Exception {
 
     Scanner entrada = new Scanner(System.in);
-    System.out.print("Nome do arquivo: ");
-    String arquivo = entrada.next();
+    String arquivo = "arquivo.txt";
     String[] dicionarioOrdenado = new String[1000];
 
     for (int i = 0; i < dicionarioOrdenado.length; i ++){
@@ -30,6 +29,7 @@ public class Trabalho1 {
     }
 
     dicionarioOrdenado = processarArquivo(dicionarioOrdenado, arquivo);
+
 
     System.out.println("total de palavras diferentes no dicionario = " + contarPalavrasEImprimir(dicionarioOrdenado));
     
@@ -39,28 +39,29 @@ public class Trabalho1 {
   public static String[] processarArquivo(String[] dicionarioOrdenado, String arquivo) throws Exception {
     
     Scanner entrada = new Scanner(new File(arquivo));
-    String[] linha;
+    String[] palavra;
     while (entrada.hasNextLine()) {
-      linha = entrada.next().toLowerCase().split("[\\W]");
-      popularDicionario(dicionarioOrdenado, linha);
+      int i = 0;
+      palavra = entrada.next().toLowerCase().split("[\\W]");
+      popularDicionario(dicionarioOrdenado, palavra[i]);
     }
     return dicionarioOrdenado;
   }
 
   //Verifica se a palavra já consta no vetor
-  public static boolean buscaBinaria(String[] dicionarioOrdenado, String word) {
+  public static boolean buscaBinaria(String[] dicionarioOrdenado, String palavra) {
     int i = 0;
     int f = dicionarioOrdenado.length - 1;
     int m;
-
+    
     while (i <= f) {
       m = (i + f) / 2;
 
-      if (dicionarioOrdenado[m].compareTo(word) == 0){ 
+      if (dicionarioOrdenado[m].compareTo(palavra) == 0){ 
       return false; 
-      }else if (dicionarioOrdenado[m].compareTo(word) < 0){ // esquerda
+      }else if (dicionarioOrdenado[m].compareTo(palavra) < 0){ // esquerda
         i = m + 1; 
-      }else if (dicionarioOrdenado[m].compareTo(word) > 0){
+      }else if (dicionarioOrdenado[m].compareTo(palavra) > 0){
         f = m - 1; // x > v[m] - direita
       }
     }
@@ -68,11 +69,13 @@ public class Trabalho1 {
   }
 
   //Insere a palavra no vetor de forma ordenada
-  public static String[] popularDicionario(String[] dicionarioOrdenado, String[] linha) {
+  public static String[] popularDicionario(String[] dicionarioOrdenado, String palavra) {
     int indice = 0;
-    if (buscaBinaria(dicionarioOrdenado, linha[indice]) == true) {
-      dicionarioOrdenado[indice] = linha[indice];
+  
+    if (buscaBinaria(dicionarioOrdenado, palavra) == true) {
+      dicionarioOrdenado[indice] = palavra;
       for (int i = 1; i < dicionarioOrdenado.length; i++) {
+
           String aux = dicionarioOrdenado[i];
           int j = i - 1;
           while ((j >= 0) && dicionarioOrdenado[j].compareTo(aux) > 0) {
@@ -81,8 +84,8 @@ public class Trabalho1 {
           } 
           dicionarioOrdenado[j + 1] = aux;
         }
+        
     }
-
     return dicionarioOrdenado;
   }
 
@@ -96,7 +99,6 @@ public class Trabalho1 {
         count += 1;
       }
     }
-
     return count;
   }
 }
